@@ -1,23 +1,19 @@
 defmodule Dictionary do
   @moduledoc """
-  Documentation for Dictionary.
+  Dictionary reads in a file of words separated by
+  newline (\n) characters and returns a single randomly
+  selected word from the list.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Dictionary.hello
-      :world
-
-  """
   def random_word() do
-    Enum.random(word_list())
+    word_list()
+    |> Enum.random()
   end
 
   defp word_list do
-    File.read!("assets/words.txt")
+    "../assets/words.txt"
+    |> Path.expand(__DIR__)
+    |> File.read!()
     |> String.split(~r/\n/)
   end
 end
